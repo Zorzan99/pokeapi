@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pokeapi/api/api_base.dart';
 import 'package:pokeapi/pages/home/home_cubit.dart';
+import 'package:pokeapi/pages/home/home_page.dart';
 import 'package:pokeapi/repository/pokemons_repository.dart';
 import 'package:pokeapi/repository/pokemons_repository_impl.dart';
 import 'package:provider/provider.dart';
-import 'package:pokeapi/pages/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());

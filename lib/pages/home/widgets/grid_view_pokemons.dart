@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokeapi/models/pokemon_model.dart';
 import 'package:pokeapi/pages/home/home_cubit.dart';
 import 'package:pokeapi/pages/home/home_state.dart';
+import 'package:pokeapi/pages/home/widgets/card_pokmenons.dart';
+import 'package:pokeapi/pages/home/widgets/loader.dart';
 
 class GridViewPokemons extends StatefulWidget {
   const GridViewPokemons({super.key});
@@ -12,8 +17,7 @@ class GridViewPokemons extends StatefulWidget {
 }
 
 class _GridViewPokemonsState extends State<GridViewPokemons> {
-  List<PokemonModel> pokemons =
-      []; // Adiciona uma lista para armazenar os Pokémons
+  List<PokemonModel> pokemons = [];
 
   @override
   void initState() {
@@ -25,52 +29,61 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
 
   @override
   Widget build(BuildContext context) {
-    final sizeHeight = MediaQuery.of(context).size.height;
-    final sizeWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is LoadedHome) {
-          pokemons = state.pokemons; // Atualiza a lista de Pokémons
-        }
-        return GridView.builder(
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 8.0,
-            childAspectRatio: 1.4,
-          ),
-          padding: const EdgeInsets.all(8.0),
-          itemCount: pokemons.length,
-          itemBuilder: (context, index) {
-            final pokemon = pokemons[index]; // Obtém o Pokémon atual
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color(0xff41C8A8),
+          return Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              title: const Text(
+                'Pokedex',
+                style: TextStyle(color: Colors.white),
               ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      pokemon.name ?? '', // Acessa o nome do Pokémon
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
+              backgroundColor: Colors.black,
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8.0,
+                      crossAxisSpacing: 8.0,
+                      childAspectRatio: 1.4,
                     ),
-                    const SizedBox(height: 10),
-                    // Aqui você pode acessar outras propriedades do Pokémon, como tipo, altura, peso, etc.
-                  ],
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: state.pokemons.length,
+                    itemBuilder: (context, index) {
+                      final pokemon = state.pokemons[index];
+                      return CardPokmenons(
+                        pokemon: pokemon,
+                        title: pokemon.name ?? '',
+                        title2:
+                            pokemon.type!.length > 1 ? pokemon.type![1] : '',
+                        imageNetwork: CachedNetworkImage(
+                          imageUrl: pokemon.img ?? '',
+                          height: 70,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      );
+                    },
+                  )
+                ],
               ),
-            );
-          },
-        );
+            ),
+          );
+        } else if (state is LoadingHome) {
+          return const Loader();
+        } else {
+          // Trate outros estados aqui, se necessário
+          return const SizedBox.shrink(); // Ou qualquer outro widget vazio
+        }
       },
     );
   }

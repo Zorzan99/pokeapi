@@ -17,11 +17,10 @@ class PokemonsRepositoryImpl implements PokemonsRepository {
     try {
       final result =
           await apiBase.get('/PokemonGO-Pokedex/master/pokedex.json');
-      final List<dynamic> pokemonList = json.decode(result.data)['pokemon'];
-      final List<PokemonModel> pokemons = pokemonList
-          .map<PokemonModel>((pokemonData) => PokemonModel.fromMap(pokemonData))
-          .toList();
-      return pokemons;
+
+      final json = jsonDecode(result.data) as Map<String, dynamic>;
+      final list = json['pokemon'] as List<dynamic>;
+      return list.map((e) => PokemonModel.fromMap(e)).toList();
     } on DioException catch (e, s) {
       log('Erro ao buscar dados do pokemon', error: e, stackTrace: s);
       throw Exception('Erro ao buscar usuário');

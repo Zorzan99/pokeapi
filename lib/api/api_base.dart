@@ -1,17 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
-
-class ApiBase extends DioForNative {
-  ApiBase()
-      : super(BaseOptions(
-          baseUrl: 'https://raw.githubusercontent.com/Biuni',
-        )) {
-    interceptors.add(
-      LogInterceptor(
-        requestBody: true,
-        requestHeader: true,
-        responseBody: true,
-      ),
-    );
-  }
+class ApiBase {
+  final String apiUrl =
+      'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
 }

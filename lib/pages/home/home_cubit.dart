@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(LoadedHome(pokemons: pokemons));
     } catch (e, s) {
       log('Erro ao buscar pokemons', error: e, stackTrace: s);
-      emit(FailureHome(message: 'Erro ao realizar login'));
+      emit(FailureHome(message: 'Erro ao Buscar Pokemons'));
     }
   }
 }

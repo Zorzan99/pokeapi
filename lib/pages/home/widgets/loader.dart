@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class Loader extends StatelessWidget {
@@ -11,14 +12,30 @@ class Loader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.network(
-            'https://i.pinimg.com/originals/34/c1/e5/34c1e5d371d64a581b1902ec5c4509f4.png',
+          Image.asset(
+            'assets/images/logo_pokemon.png',
           ),
-          const Center(child: CircularProgressIndicator()),
-          const Center(
-            child: Text(
-              'Carregando...',
-              style: TextStyle(color: Colors.white),
+          Center(
+            child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Image.asset('assets/images/loader.gif'),
+            ),
+          ),
+          const SizedBox(height: 13),
+          Center(
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TyperAnimatedText(
+                  'Preparando Pokédex...',
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                  speed: const Duration(milliseconds: 100),
+                ),
+              ],
+              totalRepeatCount: 3, // Repete apenas uma vez
             ),
           ),
         ],

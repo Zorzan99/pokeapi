@@ -36,8 +36,12 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.pokemon.name ?? ''),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Text(widget.pokemon.name ?? ''),
+            ),
             Row(
               children: [
                 Container(
@@ -115,21 +119,21 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                         child: TabBarView(
                           controller: _tabController,
                           children: [
-                            // Conteúdo da aba "About"
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
+                                  horizontal: 20, vertical: 20),
                               child: Column(
                                 children: [
                                   Row(
                                     children: [
                                       const Text(
-                                        'Species:',
+                                        'Specie:',
                                         style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.black,
                                         ),
                                       ),
+                                      const SizedBox(width: 10),
                                       Text(
                                         widget.pokemon.type![0],
                                         style: const TextStyle(
@@ -147,6 +151,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                           color: Colors.black,
                                         ),
                                       ),
+                                      const SizedBox(width: 10),
                                       Text(
                                         widget.pokemon.height.toString(),
                                         style: const TextStyle(
@@ -164,6 +169,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                           color: Colors.black,
                                         ),
                                       ),
+                                      const SizedBox(width: 10),
                                       Text(
                                         widget.pokemon.weight.toString(),
                                         style: const TextStyle(
@@ -181,6 +187,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                           color: Colors.black,
                                         ),
                                       ),
+                                      const SizedBox(width: 10),
                                       Text(
                                         widget.pokemon.egg ?? '',
                                         style: const TextStyle(
@@ -197,13 +204,19 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Evolutions'),
-                                  Text(
-                                    widget.pokemon.nextevolution!
-                                        .map((evolution) => evolution.name)
-                                        .toString(),
-                                  ),
+                                  Row(
+                                    children: [
+                                      const Text('Evolutions:'),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        widget.pokemon.nextevolution!
+                                            .map((evolution) => evolution.name)
+                                            .join(', '),
+                                      ),
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -212,12 +225,15 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                   horizontal: 20, vertical: 10),
                               child: Column(
                                 children: [
-                                  const Text('Weaknesses'),
-                                  Text(
-                                    widget.pokemon.weaknesses!
-                                        .map((weaknesses) => weaknesses)
-                                        .toString(),
-                                  ),
+                                  Row(
+                                    children: [
+                                      const Text('Weaknesses:'),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        widget.pokemon.weaknesses![0],
+                                      ),
+                                    ],
+                                  )
                                 ],
                               ),
                             ),

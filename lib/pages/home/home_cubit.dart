@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:pokeapi/models/pokemon_model.dart';
 import 'package:pokeapi/pages/home/home_state.dart';
 import 'package:pokeapi/repository/pokemons_repository.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final PokemonsRepository _pokemonsRepository;
+  final List<PokemonModel> pokemons = [];
+
   HomeCubit(this._pokemonsRepository) : super(InitialHome());
 
   Future<void> getPokemons() async {
@@ -14,10 +17,35 @@ class HomeCubit extends Cubit<HomeState> {
 
     try {
       final pokemons = await _pokemonsRepository.getPokemons();
-      emit(LoadedHome(pokemons: pokemons));
+      this.pokemons
+        ..clear()
+        ..addAll(pokemons);
+      emit(LoadedHome(pokemons: this.pokemons));
     } catch (e, s) {
       log('Erro ao buscar pokemons', error: e, stackTrace: s);
       emit(FailureHome(message: 'Erro ao Buscar Pokemons'));
     }
+  }
+
+  void filterPokemonsByType(String type) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (type.isEmpty) {
+      emit(LoadedHome(pokemons: pokemons));
+      return;
+    }
+
+    final filtered = pokemons
+        .where((pokemon) =>
+            pokemon.type != null &&
+            pokemon.type!.isNotEmpty &&
+            pokemon.type![0].toLowerCase() == type.toLowerCase())
+        .toList();
+
+    emit(FilteredHome(filteredPokemons: filtered));
+  }
+
+  void clearFilter() {
+    emit(LoadedHome(pokemons: pokemons));
   }
 }

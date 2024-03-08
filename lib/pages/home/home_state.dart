@@ -13,6 +13,13 @@ class LoadedHome implements HomeState {
   });
 }
 
+class FilteredHome implements HomeState {
+  final List<PokemonModel> filteredPokemons;
+  FilteredHome({
+    required this.filteredPokemons,
+  });
+}
+
 class FailureHome implements HomeState {
   final String message;
   FailureHome({

@@ -16,6 +16,7 @@ class PokemonDetailsPage extends StatefulWidget {
 class _PokemonDetailsPageState extends State<PokemonDetailsPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final List<PokemonModel> pokemons = [];
 
   @override
   void initState() {
@@ -40,31 +41,29 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Text(widget.pokemon.name ?? ''),
+              child: Text(
+                widget.pokemon.name ?? '',
+                style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  width: sizeWidth * 0.15,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    widget.pokemon.type![0],
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: widget.pokemon.type!.length > 1,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text('#${widget.pokemon.number ?? ''}'),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     width: sizeWidth * 0.15,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
@@ -72,9 +71,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                     ),
                     child: Text(
                       textAlign: TextAlign.center,
-                      widget.pokemon.type!.length > 1
-                          ? widget.pokemon.type![1]
-                          : '',
+                      widget.pokemon.type![0],
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -82,8 +79,33 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                       ),
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Visibility(
+                    visible: widget.pokemon.type!.length > 1,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      width: sizeWidth * 0.15,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        widget.pokemon.type!.length > 1
+                            ? widget.pokemon.type![1]
+                            : '',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -211,9 +233,12 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                       const Text('Evolutions:'),
                                       const SizedBox(width: 10),
                                       Text(
-                                        widget.pokemon.nextevolution!
-                                            .map((evolution) => evolution.name)
-                                            .join(', '),
+                                        widget.pokemon.nextevolution != null
+                                            ? widget.pokemon.nextevolution!
+                                                .map((evolution) =>
+                                                    evolution.name)
+                                                .join(', ')
+                                            : 'No evolutions',
                                       ),
                                     ],
                                   )

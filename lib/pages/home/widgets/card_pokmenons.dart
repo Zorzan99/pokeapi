@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pokeapi/models/pokemon_model.dart';
 
-class CardPokmenons extends StatelessWidget {
+class CardPokemons extends StatelessWidget {
   final List<PokemonModel> pokemons = [];
   final PokemonModel pokemon;
   final Widget imageNetwork;
@@ -10,7 +10,7 @@ class CardPokmenons extends StatelessWidget {
   final String title;
   final String title2;
 
-  CardPokmenons({
+  CardPokemons({
     super.key,
     required this.pokemon,
     required this.imageNetwork,
@@ -36,11 +36,11 @@ class CardPokmenons extends StatelessWidget {
         return const Color(0XFFFA7179);
       case 'Water':
         return const Color(0XFF77befe);
-      case 'Dragon  ':
+      case 'Dragon':
         return const Color(0XFFCBBE48);
-      case 'Rock  ':
+      case 'Rock':
         return const Color(0XFFC5B78C);
-      case 'Ice  ':
+      case 'Ice':
         return const Color(0XFF77befa);
       case 'Fire':
         return const Color(0xFFFF9D55);

@@ -6,6 +6,8 @@ class InitialHome implements HomeState {}
 
 class LoadingHome implements HomeState {}
 
+class LoadingFiltered implements HomeState {}
+
 class LoadedHome implements HomeState {
   final List<PokemonModel> pokemons;
   LoadedHome({

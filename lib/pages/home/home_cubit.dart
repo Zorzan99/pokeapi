@@ -28,6 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void filterPokemonsByType(String type) async {
+    emit(LoadingFiltered());
     await Future.delayed(const Duration(seconds: 2));
 
     if (type.isEmpty) {
@@ -45,7 +46,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(FilteredHome(filteredPokemons: filtered));
   }
 
-  void clearFilter() {
+  Future<void> clearFilter() async {
+    emit(LoadingFiltered());
+    await Future.delayed(const Duration(seconds: 2));
     emit(LoadedHome(pokemons: pokemons));
   }
 }

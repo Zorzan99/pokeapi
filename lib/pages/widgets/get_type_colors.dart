@@ -21,9 +21,9 @@ class GetTypeColors {
         return const Color(0XFF77befe);
       case 'Dragon  ':
         return const Color(0XFFCBBE48);
-      case 'Rock  ':
+      case 'Rock':
         return const Color(0XFFC5B78C);
-      case 'Ice  ':
+      case 'Ice':
         return const Color(0XFF77befa);
       case 'Fire':
         return const Color(0xFFFF9D55);

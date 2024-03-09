@@ -6,6 +6,7 @@ import 'package:pokeapi/pages/home/home_cubit.dart';
 import 'package:pokeapi/pages/home/home_state.dart';
 import 'package:pokeapi/pages/home/widgets/card_pokmenons.dart';
 import 'package:pokeapi/pages/home/widgets/loader.dart';
+import 'package:pokeapi/pages/widgets/get_type_colors.dart';
 
 class GridViewPokemons extends StatefulWidget {
   const GridViewPokemons({super.key});
@@ -29,9 +30,13 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
       builder: (context, state) {
         if (state is LoadedHome) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton(onPressed: () {
-              _showTypeSelectionDialog(context);
-            }),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.redAccent,
+              child: const Icon(Icons.filter_alt_outlined),
+              onPressed: () {
+                _showTypeSelectionDialog(context);
+              },
+            ),
             backgroundColor: Colors.black,
             appBar: AppBar(
               title: const Text(
@@ -111,9 +116,6 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
             ),
           );
         } else if (state is FilteredHome) {
-          print('FilteredHome state reached');
-          print(
-              'Filtered Pokemons count: ${state.filteredPokemons.length}'); // Adicione esta linha
           if (state.filteredPokemons.isEmpty) {
             return const Center(
               child: Text(
@@ -124,9 +126,14 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
           }
 
           return Scaffold(
-            floatingActionButton: FloatingActionButton(onPressed: () {
-              _showTypeSelectionDialog(context);
-            }),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: GetTypeColors()
+                  .getColorForType(state.filteredPokemons[0].type![0]),
+              onPressed: () {
+                _showTypeSelectionDialog(context);
+              },
+              child: const Icon(Icons.filter_alt_outlined),
+            ),
             backgroundColor: Colors.black,
             appBar: AppBar(
               title: const Text(
@@ -196,8 +203,28 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
               ),
             ),
           );
-        } else
+        } else if (state is LoadingFiltered) {
+          return Scaffold(
+              backgroundColor: Colors.black,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Image.asset('assets/images/circular.gif'),
+                    ),
+                    const Text(
+                      'Carregando',
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ));
+        } else {
           return const SizedBox.shrink();
+        }
       },
     );
   }
@@ -208,14 +235,27 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Selecione um tipo'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              _buildTypeOption(context, 'Water'),
-              _buildTypeOption(context, 'Rock'),
-              _buildTypeOption(context, 'Poison'),
-              // Adicione outras opções de tipos conforme necessário
-            ],
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildTypeOption(context, 'Grass'),
+                _buildTypeOption(context, 'Poison'),
+                _buildTypeOption(context, 'Bug'),
+                _buildTypeOption(context, 'Normal'),
+                _buildTypeOption(context, 'Ground'),
+                _buildTypeOption(context, 'Fighting'),
+                _buildTypeOption(context, 'Psychic'),
+                _buildTypeOption(context, 'Water'),
+                _buildTypeOption(context, 'Dragon'),
+                _buildTypeOption(context, 'Rock'),
+                _buildTypeOption(context, 'Ice'),
+                _buildTypeOption(context, 'Fire'),
+                _buildTypeOption(context, 'Ghost'),
+                _buildTypeOption(context, 'Electric'),
+                // Adicione outras opções de tipos conforme necessário
+              ],
+            ),
           ),
         );
       },

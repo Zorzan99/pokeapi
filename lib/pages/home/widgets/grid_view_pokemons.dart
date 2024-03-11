@@ -205,23 +205,32 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
           );
         } else if (state is LoadingFiltered) {
           return Scaffold(
-              backgroundColor: Colors.black,
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Image.asset('assets/images/circular.gif'),
-                    ),
-                    const Text(
-                      'Carregando',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
+            body: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                  image: AssetImage(
+                    'assets/images/circular.gif',
+                  ),
                 ),
-              ));
+              ),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Text(
+                    'Carregando',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          );
         } else {
           return const SizedBox.shrink();
         }
@@ -253,7 +262,6 @@ class _GridViewPokemonsState extends State<GridViewPokemons> {
                 _buildTypeOption(context, 'Fire'),
                 _buildTypeOption(context, 'Ghost'),
                 _buildTypeOption(context, 'Electric'),
-                // Adicione outras opções de tipos conforme necessário
               ],
             ),
           ),

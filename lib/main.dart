@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:pokeapi/api/api_base.dart';
-import 'package:pokeapi/pages/home/home_cubit.dart';
-import 'package:pokeapi/repository/pokemons_repository.dart';
-import 'package:pokeapi/repository/pokemons_repository_impl.dart';
-import 'package:pokeapi/routes/app_routes.dart';
+import 'package:pokeapi/app/api/api_base.dart';
+import 'package:pokeapi/app/pages/home/home_cubit.dart';
+import 'package:pokeapi/app/repository/pokemons_repository.dart';
+import 'package:pokeapi/app/repository/pokemons_repository_impl.dart';
+import 'package:pokeapi/app/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
 void main() {

@@ -3,10 +3,10 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import 'package:pokeapi/api/api_base.dart';
-import 'package:pokeapi/models/pokemon_model.dart';
+import 'package:pokeapi/app/api/api_base.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
 
-import './pokemons_repository.dart';
+import 'pokemons_repository.dart';
 
 class PokemonsRepositoryImpl implements PokemonsRepository {
   final ApiBase apiBase;

@@ -1,4 +1,4 @@
-import 'package:pokeapi/models/pokemon_model.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
 
 sealed class HomeState {}
 

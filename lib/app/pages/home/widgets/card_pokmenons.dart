@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokeapi/models/pokemon_model.dart';
-import 'package:pokeapi/pages/widgets/get_type_colors.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
+import 'package:pokeapi/app/pages/widgets/get_type_colors.dart';
 
 class CardPokemons extends StatelessWidget {
   final List<PokemonModel> pokemons = [];

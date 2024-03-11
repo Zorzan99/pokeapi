@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:pokeapi/models/pokemon_next_evolution_modedl.dart';
+import 'package:pokeapi/app/models/pokemon_next_evolution_modedl.dart';
 
 class PokemonModel {
   final int? id;

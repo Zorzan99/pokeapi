@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokeapi/models/pokemon_model.dart';
-import 'package:pokeapi/pages/home/home_page.dart';
-import 'package:pokeapi/pages/pokemon_detail/pokemon_detail_page.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
+import 'package:pokeapi/app/pages/home/home_page.dart';
+import 'package:pokeapi/app/pages/pokemon_detail/pokemon_detail_page.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

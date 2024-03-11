@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:pokeapi/models/pokemon_model.dart';
-import 'package:pokeapi/pages/home/home_state.dart';
-import 'package:pokeapi/repository/pokemons_repository.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
+import 'package:pokeapi/app/pages/home/home_state.dart';
+import 'package:pokeapi/app/repository/pokemons_repository.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final PokemonsRepository _pokemonsRepository;

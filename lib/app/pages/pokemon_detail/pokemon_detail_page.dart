@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pokeapi/models/pokemon_model.dart';
-import 'package:pokeapi/pages/widgets/get_type_colors.dart';
+import 'package:pokeapi/app/models/pokemon_model.dart';
+import 'package:pokeapi/app/pages/widgets/get_type_colors.dart';
 
 class PokemonDetailsPage extends StatefulWidget {
   final PokemonModel pokemon;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokeapi/pages/home/widgets/grid_view_pokemons.dart';
+import 'package:pokeapi/app/pages/home/widgets/grid_view_pokemons.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
